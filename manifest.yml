@@ -1,0 +1,9 @@
+---
+applications:
+- name: angular-app
+  memory: 1024MB
+  instances: 1
+  host: angular-app-service
+  domains:
+  - apps.wdc-np.itcna.vmware.com
+  timeout: 600
