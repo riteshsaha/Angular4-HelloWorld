@@ -53,7 +53,7 @@ module.exports = function (config) {
           '--proxy-server=\'direct://\''
        ]
       }
-    }
+    },
     
     singleRun: false,
     coverageIstanbulReporter: {
