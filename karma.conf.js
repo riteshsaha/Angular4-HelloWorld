@@ -13,6 +13,7 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-remap-istanbul'),
+      require('karma-phantomjs-launcher'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular/cli/plugins/karma')
     ],
@@ -37,19 +38,27 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['ChromeHeadless'],
+    browsers: ['PhantomJS', 'PhantomJS_custom'],
+ 
+    // you can define custom flags
     customLaunchers: {
-      'ChromeHeadless': {
-          base: 'Chrome',
-          flags: [
-              '--headless',
-              '--disable-gpu',
-              // Without a remote debugging port, Google Chrome exits immediately.
-              '--remote-debugging-port=9222'
-          ],
-          debug: true
+      'PhantomJS_custom': {
+        base: 'PhantomJS',
+        options: {
+          windowName: 'my-window',
+          settings: {
+            webSecurityEnabled: false
+          },
+        },
+        flags: ['--load-images=true'],
+        debug: true
       }
-  },
+    },
+ 
+    phantomjsLauncher: {
+      // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
+      exitOnResourceError: true
+    },
     
     singleRun: false,
     coverageIstanbulReporter: {
